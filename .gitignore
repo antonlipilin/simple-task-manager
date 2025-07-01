@@ -1,0 +1,44 @@
+# Gradle build and cache directories
+.gradle/
+build/
+*/build/
+
+# Gradle wrapper config (keep wrapper jar, ignore settings)
+gradle-app.setting
+!gradle-wrapper.jar
+
+# Local configuration file (e.g., SDK paths)
+local.properties
+
+# Compiled class files and packaged archives
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+
+# IntelliJ IDEA / JetBrains IDE files
+*.iml
+.idea/
+*.ipr
+*.iws
+/out/
+
+# Eclipse files
+.project
+.classpath
+.settings/
+.metadata
+bin/
+tmp/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db
