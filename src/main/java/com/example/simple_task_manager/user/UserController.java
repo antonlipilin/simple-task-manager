@@ -17,6 +17,11 @@ public class UserController {
         return "tasks";
     }
 
+    @GetMapping("/")
+    public String redirectToMainPage() {
+        return "redirect:/tasks";
+    }
+
     @GetMapping("/registration")
     public String showRegistrationForm() {
         return "registration";
