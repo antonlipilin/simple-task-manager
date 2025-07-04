@@ -19,7 +19,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.authorizeHttpRequests(request -> {
             request.requestMatchers("/login", "/registration").permitAll()
-                    .requestMatchers("/tasks", "/", "/logout").authenticated()
+                    .requestMatchers("/tasks", "/logout").authenticated()
                     .anyRequest().denyAll();
         }).formLogin(form ->
                         form.loginPage("/login")
