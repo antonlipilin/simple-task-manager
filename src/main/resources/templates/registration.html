@@ -6,13 +6,22 @@
 </head>
 <body>
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <form th:action="@{/registration}" method="post" class="p-4 border bg-light" style="min-width: 300px; max-width: 400px; width: 100%;">
+    <form th:action="@{/registration}" th:object="${user}" method="post" class="p-4 border bg-light" style="min-width: 300px; max-width: 400px; width: 100%;">
         <h4 class="text-uppercase text-center mb-5">Create an account</h4>
         <!--        Form inputs-->
+        <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" role="alert">
+            <p th:text="${#fields.errors('username')[0]}"></p>
+        </div>
+
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" name="username" id="username" placeholder="Username">
         </div>
+
+        <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger" role="alert">
+            <p th:text="${#fields.errors('password')[0]}"></p>
+        </div>
+
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" name="password" id="password" placeholder="Password">
