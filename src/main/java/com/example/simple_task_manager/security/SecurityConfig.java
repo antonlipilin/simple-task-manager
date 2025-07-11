@@ -3,6 +3,7 @@ package com.example.simple_task_manager.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,6 +25,7 @@ public class SecurityConfig {
         }).formLogin(form ->
                         form.loginPage("/login")
                                 .defaultSuccessUrl("/tasks", true))
+                .rememberMe(Customizer.withDefaults())
                 .build();
     }
 
