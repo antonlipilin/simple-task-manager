@@ -36,4 +36,8 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         return user;
     }
+
+    public User getUserById(long id) {
+        return userRepository.findUserById(id);
+    }
 }
