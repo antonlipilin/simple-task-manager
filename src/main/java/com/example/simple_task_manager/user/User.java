@@ -17,6 +17,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private String userPicture;
+
     public User() {
     }
 
@@ -47,5 +49,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserPicture() {
+        return userPicture;
+    }
+
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
     }
 }
