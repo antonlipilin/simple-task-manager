@@ -1,7 +1,9 @@
 package com.example.simple_task_manager.user;
 
+import com.example.simple_task_manager.security.UserDetailsImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +27,12 @@ public class UserController {
     }
 
     @GetMapping("/tasks")
-    public String showMainPage() {
+    public String showMainPage(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+        long userId = userDetails.getUser().getId();
+        User user = userService.getUserById(userId);
+
+        model.addAttribute("user", user);
+
         return "tasks";
     }
 
