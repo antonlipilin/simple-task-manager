@@ -20,7 +20,7 @@
                         <img th:src="${user.userPicture != null} ? @{/avatars/${user.userPicture}} : @{/avatars/anonymous.png}" alt="mdo" width="32" height="32" class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1" style="">
-                        <li><a class="dropdown-item d-flex justify-content-center" href="#">Settings</a></li>
+                        <li><a class="dropdown-item d-flex justify-content-center" th:href="@{/settings}">Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form th:action="@{/logout}" method="post" class="d-flex justify-content-center">
@@ -32,9 +32,8 @@
             </div>
         </div>
     </header>
-    <div class="divider"></div>
 </div>
-    <div class="container mt-3">
+    <div class="container mt-3 bg-light">
         <h3 class="d-flex justify-content-center">My Main Page</h3>
     </div>
 </main>

@@ -5,8 +5,8 @@
     <title>Registration</title>
 </head>
 <body>
-<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <form th:action="@{/registration}" th:object="${user}" method="post" class="p-4 border bg-light" style="min-width: 300px; max-width: 400px; width: 100%;">
+<div class="d-flex justify-content-center align-items-center bg-light" style="height: 100vh;">
+    <form th:action="@{/registration}" th:object="${user}" method="post" class="p-4 border bg-white" style="min-width: 300px; max-width: 400px; width: 100%;">
         <h4 class="text-uppercase text-center mb-5">Create an account</h4>
         <!--        Form inputs-->
         <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" role="alert">
