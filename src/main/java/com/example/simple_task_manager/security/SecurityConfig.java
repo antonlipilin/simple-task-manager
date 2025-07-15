@@ -21,7 +21,7 @@ public class SecurityConfig {
         return httpSecurity.authorizeHttpRequests(request -> {
             request.requestMatchers("/login", "/registration", "/").permitAll()
                     .requestMatchers(HttpMethod.GET, "/images/**", "/css/**", "/avatars/**").permitAll()
-                    .requestMatchers("/tasks", "/logout").authenticated()
+                    .requestMatchers("/tasks", "/logout", "/settings").authenticated()
                     .anyRequest().denyAll();
         }).formLogin(form ->
                         form.loginPage("/login")
