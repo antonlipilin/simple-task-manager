@@ -63,4 +63,9 @@ public class UserController {
 
         return "redirect:/login?success";
     }
+
+    @GetMapping("/settings")
+    public String settings() {
+        return "settings";
+    }
 }
