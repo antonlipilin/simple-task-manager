@@ -73,4 +73,11 @@ public class UserController {
 
         return "settings";
     }
+
+    @PostMapping("/settings/changeImage")
+    public String changeImage(@RequestAttribute("file") MultipartFile file, @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+        userService.changeProfileImage(file, userDetails);
+
+        return "redirect:/settings";
+    }
 }
