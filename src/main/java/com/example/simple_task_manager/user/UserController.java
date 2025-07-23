@@ -65,7 +65,12 @@ public class UserController {
     }
 
     @GetMapping("/settings")
-    public String settings() {
+    public String settings(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+        long userId = userDetails.getUser().getId();
+        User user = userService.getUserById(userId);
+
+        model.addAttribute("user", user);
+
         return "settings";
     }
 }
