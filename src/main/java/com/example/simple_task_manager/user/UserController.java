@@ -1,6 +1,7 @@
 package com.example.simple_task_manager.user;
 
 import com.example.simple_task_manager.security.UserDetailsImpl;
+import com.example.simple_task_manager.user.dto.ChangePasswordDto;
 import com.example.simple_task_manager.user.dto.UserDto;
 import com.example.simple_task_manager.user.exception.UserAlreadyExistsException;
 import jakarta.validation.Valid;
@@ -35,7 +36,7 @@ public class UserController {
     @GetMapping("/tasks")
     public String showMainPage(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
         long userId = userDetails.getUser().getId();
-        User user = userService.getUserById(userId);
+        UserDto user = userService.getUserById(userId);
 
         model.addAttribute("user", user);
 
@@ -73,9 +74,13 @@ public class UserController {
     @GetMapping("/settings")
     public String settings(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
         long userId = userDetails.getUser().getId();
-        User user = userService.getUserById(userId);
+        UserDto user = userService.getUserById(userId);
 
         model.addAttribute("user", user);
+
+        if (!model.containsAttribute("form")) {
+            model.addAttribute("form", new ChangePasswordDto());
+        }
 
         return "settings";
     }
