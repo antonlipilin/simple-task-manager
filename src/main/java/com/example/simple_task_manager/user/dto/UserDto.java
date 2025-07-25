@@ -16,6 +16,8 @@ public class UserDto {
     @Pattern(regexp = "^(?! )[A-Za-z0-9@#$%^&*()_+\\-= \\[\\]{}|\\\\;:',.<>/?]+(?<! )$", message = "Password must contain only letters, digits, allowed special characters, spaces, and must not start or end with space")
     private String password;
 
+    private String userPicture;
+
     public UserDto() {
     }
 
@@ -38,5 +40,13 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserPicture() {
+        return userPicture;
+    }
+
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
     }
 }
