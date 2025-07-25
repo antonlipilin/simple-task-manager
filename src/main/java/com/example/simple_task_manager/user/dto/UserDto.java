@@ -1,4 +1,4 @@
-package com.example.simple_task_manager.user;
+package com.example.simple_task_manager.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

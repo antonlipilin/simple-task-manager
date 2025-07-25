@@ -1,6 +1,7 @@
 package com.example.simple_task_manager.user;
 
 import com.example.simple_task_manager.security.UserDetailsImpl;
+import com.example.simple_task_manager.user.dto.UserDto;
 import com.example.simple_task_manager.user.exception.ImageIOException;
 import com.example.simple_task_manager.user.exception.UserAlreadyExistsException;
 import jakarta.transaction.Transactional;
