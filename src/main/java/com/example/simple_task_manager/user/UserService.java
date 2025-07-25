@@ -46,8 +46,9 @@ public class UserService {
         return user;
     }
 
-    public User getUserById(long id) {
-        return userRepository.findUserById(id);
+    public UserDto getUserById(long id) {
+        User loadedUser = userRepository.findUserById(id);
+        return mapper.map(loadedUser, UserDto.class);
     }
 
     @Transactional
