@@ -5,19 +5,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, TokenBasedRememberMeServices rememberMeServices) throws Exception {
         return httpSecurity.authorizeHttpRequests(request -> {
             request.requestMatchers("/login", "/registration", "/").permitAll()
                     .requestMatchers(HttpMethod.GET, "/images/**", "/css/**", "/avatars/**").permitAll()
@@ -26,12 +24,23 @@ public class SecurityConfig {
         }).formLogin(form ->
                         form.loginPage("/login")
                                 .defaultSuccessUrl("/tasks", true))
-                .rememberMe(Customizer.withDefaults())
+                .rememberMe(rMe ->
+                    rMe.rememberMeServices(rememberMeServices)
+                            .key("AbcdefghiJklmNoPqRstUvXyz1234567890")
+                            .tokenValiditySeconds(1209600) // 14 days
+                )
                 .build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public TokenBasedRememberMeServices tokenBasedRememberMeServices(UserDetailsService userDetailsService) {
+        String key = "AbcdefghiJklmNoPqRstUvXyz1234567890";
+
+        return new TokenBasedRememberMeServices(key, userDetailsService);
     }
 }
