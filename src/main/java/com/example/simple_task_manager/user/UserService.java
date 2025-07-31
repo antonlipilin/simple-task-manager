@@ -1,6 +1,7 @@
 package com.example.simple_task_manager.user;
 
 import com.example.simple_task_manager.security.UserDetailsImpl;
+import com.example.simple_task_manager.user.dto.ChangePasswordDto;
 import com.example.simple_task_manager.user.dto.UserDto;
 import com.example.simple_task_manager.user.exception.ImageIOException;
 import com.example.simple_task_manager.user.exception.UserAlreadyExistsException;
@@ -88,5 +89,14 @@ public class UserService {
             throw e;
         }
 
+    }
+
+    public void changePassword(ChangePasswordDto dto, UserDetailsImpl userDetails) {
+        long userId = userDetails.getUser().getId();
+        User loadedUser = this.userRepository.findUserById(userId);
+
+        loadedUser.setPassword(passwordEncoder.encode(dto.getNewPassword()));
+
+        this.userRepository.save(loadedUser);
     }
 }
