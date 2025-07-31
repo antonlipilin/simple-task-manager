@@ -8,14 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(exception = {
-            EmptyFileNameException.class,
-            FileSizeExceededException.class,
-            MissingFileException.class,
-            UnsupportedFileTypeException.class,
-            ImageIOException.class,
-            InvalidImageFileException.class
-    })
+    @ExceptionHandler(ImageUploadException.class)
     public String handleImageUploadExceptions (Exception ex, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
 
