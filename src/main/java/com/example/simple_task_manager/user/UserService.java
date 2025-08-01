@@ -8,6 +8,7 @@ import com.example.simple_task_manager.user.exception.UserAlreadyExistsException
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -87,6 +88,28 @@ public class UserService {
             }
 
             throw e;
+        }
+
+    }
+
+    @Transactional
+    public void deleteProfileImage() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        try {
+            long userId = userDetails.getUser().getId();
+            User loadedUser = this.userRepository.findUserById(userId);
+
+            String fileName = loadedUser.getUserPicture();
+
+            if (fileName != null) {
+                loadedUser.setUserPicture(null);
+                userRepository.save(loadedUser);
+
+                imageService.delete(fileName);
+            }
+        } catch (IOException e) {
+            throw new ImageIOException("Failed to delete profile image. Please try again.", e);
         }
 
     }
