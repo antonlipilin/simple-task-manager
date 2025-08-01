@@ -111,6 +111,13 @@ public class UserController {
         return "redirect:/settings";
     }
 
+    @PostMapping("/settings/deleteImage")
+    public String deleteImage() {
+        userService.deleteProfileImage();
+
+        return "redirect:/settings";
+    }
+
     @PostMapping("/settings/changePassword")
     public String changePassword(@ModelAttribute("changePasswordForm") @Valid ChangePasswordDto form,
                                  BindingResult bindingResult,
