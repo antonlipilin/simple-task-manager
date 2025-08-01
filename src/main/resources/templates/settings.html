@@ -27,6 +27,7 @@
                                 <p th:text="${errorMessage}"></p>
                             </div>
                             <button type="submit" class="btn btn-primary mt-auto position-absolute bottom-0">Save</button>
+                            <button th:if="${user.userPicture != null}" type="submit" class="btn btn-danger mt-auto position-absolute bottom-0 end-0" th:attr="formaction=@{/settings/deleteImage}">Delete Image</button>
                         </form>
 
                     </div>
