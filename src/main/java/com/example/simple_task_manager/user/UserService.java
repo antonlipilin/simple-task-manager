@@ -54,7 +54,8 @@ public class UserService {
     }
 
     @Transactional
-    public void changeProfileImage(MultipartFile file, UserDetailsImpl userDetails) {
+    public void changeProfileImage(MultipartFile file) {
+        UserDetailsImpl userDetails = getAuthenticatedUserDetails();
         String savedFileName = null;
 
         try {
@@ -102,7 +103,7 @@ public class UserService {
 
     @Transactional
     public void deleteProfileImage() {
-        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetailsImpl userDetails = getAuthenticatedUserDetails();
 
         try {
             long userId = userDetails.getUser().getId();
@@ -122,7 +123,8 @@ public class UserService {
 
     }
 
-    public void changePassword(ChangePasswordDto dto, UserDetailsImpl userDetails) {
+    public void changePassword(ChangePasswordDto dto) {
+        UserDetailsImpl userDetails = getAuthenticatedUserDetails();
         long userId = userDetails.getUser().getId();
         User loadedUser = this.userRepository.findUserById(userId);
 
