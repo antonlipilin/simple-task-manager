@@ -54,7 +54,7 @@ public class UserService {
     }
 
     @Transactional
-    public void changeProfileImage(MultipartFile file, UserDetailsImpl userDetails) throws IOException {
+    public void changeProfileImage(MultipartFile file, UserDetailsImpl userDetails) {
         String savedFileName = null;
 
         try {
@@ -77,14 +77,22 @@ public class UserService {
         } catch (IOException e) {
 
             if (savedFileName != null) {
-                imageService.delete(savedFileName);
+                try {
+                    imageService.delete(savedFileName);
+                } catch (IOException exception) {
+                    throw new ImageIOException("Failed to change profile image. Please try again.", e);
+                }
             }
 
             throw new ImageIOException("Failed to change profile image. Please try again.", e);
         }  catch (Exception e) {
 
             if (savedFileName != null) {
-                imageService.delete(savedFileName);
+                try {
+                    imageService.delete(savedFileName);
+                } catch (IOException exception) {
+                    throw new ImageIOException("Failed to change profile image. Please try again.", e);
+                }
             }
 
             throw e;
