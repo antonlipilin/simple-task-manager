@@ -105,8 +105,8 @@ public class UserController {
     }
 
     @PostMapping("/settings/changeImage")
-    public String changeImage(@RequestAttribute("file") MultipartFile file, @AuthenticationPrincipal UserDetailsImpl userDetails)  {
-        userService.changeProfileImage(file, userDetails);
+    public String changeImage(@RequestAttribute("file") MultipartFile file)  {
+        userService.changeProfileImage(file);
 
         return "redirect:/settings";
     }
@@ -134,9 +134,7 @@ public class UserController {
             return "redirect:/settings";
         }
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
-        this.userService.changePassword(form, userDetails);
+        this.userService.changePassword(form);
         this.logoutHandler.logout(request, response, authentication);
         this.rememberMeServices.logout(request, response, authentication);
 
