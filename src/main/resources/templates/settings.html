@@ -66,9 +66,26 @@
                 <div class="card-body">
                     <h3 class="card-title mb-3">Deleting account</h3>
                     <p class="card-text">Deleting your account will remove all of your data from database. This cannot be undone.</p>
-                    <form>
-                        <button type="submit" class="btn btn-danger">Delete account</button>
-                    </form>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" type="button">Delete account</button>
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Delete account</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Do you want to delete your account?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <form th:action="@{/settings/deleteUser}" method="post">
+                                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
