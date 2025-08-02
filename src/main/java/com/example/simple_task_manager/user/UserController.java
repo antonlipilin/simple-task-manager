@@ -105,7 +105,7 @@ public class UserController {
     }
 
     @PostMapping("/settings/changeImage")
-    public String changeImage(@RequestAttribute("file") MultipartFile file, @AuthenticationPrincipal UserDetailsImpl userDetails) throws IOException {
+    public String changeImage(@RequestAttribute("file") MultipartFile file, @AuthenticationPrincipal UserDetailsImpl userDetails)  {
         userService.changeProfileImage(file, userDetails);
 
         return "redirect:/settings";
