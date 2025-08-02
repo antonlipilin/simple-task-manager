@@ -130,4 +130,9 @@ public class UserService {
 
         this.userRepository.save(loadedUser);
     }
+
+
+    private UserDetailsImpl getAuthenticatedUserDetails() {
+        return (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
 }
