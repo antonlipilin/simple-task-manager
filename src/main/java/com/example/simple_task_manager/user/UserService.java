@@ -89,19 +89,7 @@ public class UserService {
             }
 
             throw new ImageIOException("Failed to change profile image. Please try again.", e);
-        }  catch (Exception e) {
-
-            if (savedFileName != null) {
-                try {
-                    imageService.delete(savedFileName);
-                } catch (IOException exception) {
-                    throw new ImageIOException("Failed to change profile image. Please try again.", e);
-                }
-            }
-
-            throw e;
         }
-
     }
 
     @Transactional
