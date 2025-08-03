@@ -135,9 +135,21 @@ public class UserController {
         }
 
         this.userService.changePassword(form);
-        this.logoutHandler.logout(request, response, authentication);
-        this.rememberMeServices.logout(request, response, authentication);
+        performLogout(request, response, authentication);
 
         return "redirect:/login?changePassword";
+    }
+
+    @PostMapping("/settings/deleteUser")
+    public String deleteUser(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        this.userService.deleteUserAccount();
+        performLogout(request, response, authentication);
+
+        return "redirect:/login?delete";
+    }
+
+    private void performLogout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        this.logoutHandler.logout(request, response, authentication);
+        this.rememberMeServices.logout(request, response, authentication);
     }
 }
