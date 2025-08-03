@@ -128,4 +128,23 @@ public class UserService {
     private UserDetailsImpl getAuthenticatedUserDetails() {
         return (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
+
+    public void deleteUserAccount() {
+        UserDetailsImpl userDetails = getAuthenticatedUserDetails();
+        long userId = userDetails.getUser().getId();
+
+        try {
+            User loadedUser = userRepository.findUserById(userId);
+            String fileName = loadedUser.getUserPicture();
+
+            userRepository.deleteById(userId);
+
+            if (fileName != null) {
+                imageService.delete(fileName);
+            }
+        } catch (IOException e) {
+            LOGGER.error("Failed to delete profile image for user ID {}", userId, e);
+        }
+    }
 }
